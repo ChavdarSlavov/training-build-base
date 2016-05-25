@@ -1,0 +1,35 @@
+# Project specific #
+#################
+dist/
+
+# Node specific #
+#################
+lib-cov
+*.seed
+*.log
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+#results
+npm-debug.log
+node_modules/
+
+# OS generated files #
+######################
+.log
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Sublime specific #
+####################
+sftp-config*
+*.sublime-*
