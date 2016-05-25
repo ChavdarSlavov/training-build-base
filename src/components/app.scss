@@ -1,0 +1,17 @@
+@import "./shared/styles/box.scss";
+@import "./shared/styles/variables/colors.scss";
+
+:export { 
+	mySpecialColor: $primary-color; 
+}
+
+
+.app {
+	@extend %box;
+	color: $primary-color;
+	&:hover {
+		$bgrColor: lighten($primary-color, 40%);
+		background-color: $bgrColor;
+		color: invert($bgrColor);
+	}
+}

@@ -1,7 +1,8 @@
-.box {
+%box {
   border-width: 1px;
   border-style: solid;
   padding: 40px;
   margin: 0 6px;
   max-width: 400px;
+  transform: translateY(50%);
 }

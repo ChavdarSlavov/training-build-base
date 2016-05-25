@@ -3,11 +3,18 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const extractSass = new ExtractTextPlugin('style.css', { allChunks: true });
 
 const PATHS = {
   src: path.join(__dirname, 'src'),
   dist: path.join(__dirname, 'dist')
 };
+const sassLoaders =  [
+  'css?sourceMap&modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+  'postcss-loader',
+  'resolve-url',
+  'sass?sourceMap=true&sourceMapContents=true'
+].join("!");
 
 module.exports = {
   devServer: {
@@ -40,10 +47,10 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
       },
-      { 
-        test: /\.css$/, 
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader') 
-      },
+      {
+          test: /\.scss$/,
+          loader: extractSass.extract('style', sassLoaders)
+      }
     ]
   },
   postcss: [
@@ -53,7 +60,7 @@ module.exports = {
     new CleanWebpackPlugin([PATHS.dist], {
       root: process.cwd()
     }),
-    new ExtractTextPlugin('style.css', { allChunks: true }),
+    extractSass,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({

@@ -1,4 +1,0 @@
-.app {
-	composes: box from "./shared/styles/layout.css";
-	color: green;
-}
