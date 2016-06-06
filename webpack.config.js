@@ -3,18 +3,18 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const extractSass = new ExtractTextPlugin('style.css', { allChunks: true });
+const extractSass = new ExtractTextPlugin('style.css', {allChunks: true});
 
 const PATHS = {
   src: path.join(__dirname, 'src'),
   dist: path.join(__dirname, 'dist')
 };
-const sassLoaders =  [
+const sassLoaders = [
   'css?sourceMap&modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
   'postcss-loader',
   'resolve-url',
   'sass?sourceMap=true&sourceMapContents=true'
-].join("!");
+].join('!');
 
 module.exports = {
   devServer: {
@@ -30,7 +30,7 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:3000/',
     'webpack/hot/only-dev-server',
-    PATHS.src,
+    PATHS.src
   ],
   output: {
     path: PATHS.dist,
@@ -45,11 +45,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0']
       },
       {
-          test: /\.scss$/,
-          loader: extractSass.extract('style', sassLoaders)
+        test: /\.scss$/,
+        loader: extractSass.extract('style', sassLoaders)
       }
     ]
   },
@@ -68,4 +68,4 @@ module.exports = {
       inect: true
     })
   ]
-}
+};
